@@ -46,23 +46,29 @@ def result_page():
     # pretty print the entire parsed feed
     #pprint(f) 
     
+    print_item_length = str(len(f.entries))
     print ("This feed has", len(f.entries), "items")
     
     # title, decription, date and link for all items
     def get_desc(e):
         for e in f.entries:
-            print(e.title, "<br>")
-            print(e.description, "<br>")
-            print(e.published, "<br>")
-            print(e.link, "<br>")
-            print()   
+            #print(e.title, "<br>")
+            #print(e.description, "<br>")
+            #print(e.published, "<br>")
+            #print("<a href=", e.link, ">Link</a><br>")
+            #print()
+            entry = e.title, "<br>"
+            entry = entry + e.description, "<br>"
+            entry = entries + e.published, "<br>"
+            entry = entry + "<a href=", e.link, ">Link</a><br>"
+        return entry
      
     html = """
         <html>
           <body>
             You searched for:  """ + request.args["search_term"] + """ <br>
-            This feed has: """ + len(f.entries) + """ items. <br>
-            """  """
+            This feed has: """ + print_item_length + """ items. <br>
+            """ + str(get_desc()) + """
           </body>
         </html>"""
     return html
